@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:8.0                            # Última versión comunitaria oficial de MySQL
+    container_name: mysql_server
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd             # Contraseña del usuario root
+      MYSQL_DATABASE: pruebapokeapi_db          # Base de datos inicial
+      MYSQL_USER: pokeapi                       # Usuario de la base de datos
+      MYSQL_PASSWORD: pokemonmaster             # Contraseña del usuario
+    ports:
+      - "3306:3306"                             # Puerto de MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql               # Persistencia de datos
+      - ./mysql-init-scripts:/docker-entrypoint-initdb.d  # Scripts SQL de inicialización
+
+volumes:
+  mysql_data:
